@@ -91,8 +91,9 @@ app.put('/book3/:id', function(req, res){
 	var data = {
 		title :req.body.title,
 		author : req.body.author,
-		category : req.body.category,
+		category : req.body.category
 	}
+
 	Book.findOneAndUpdate({_id: req.params.id},{$set: data}, 
 		{upsert: true, new: true},
 		function(err, result){
