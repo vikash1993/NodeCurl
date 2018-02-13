@@ -86,7 +86,26 @@ app.put('/book/:id', function(req, res){
 		})
 	})
 });
-
+/////////////////////////////////////////
+app.put('/book3/:id', function(req, res){
+	var data = {
+		title :req.body.title,
+		author : req.body.author,
+		category : req.body.category,
+	}
+	Book.findOneAndUpdate({_id: req.params.id},{$set: data}, 
+		{upsert: true, new: true},
+		function(err, result){
+			if(err){
+				console.log(err);
+			}
+			else{
+				console.log(result);
+				res.send(result);
+			}
+	})
+});
+/**********************Single Object***********************************/
 app.put('/book2/:id', function(req, res){
 	Book.findOneAndUpdate({_id: req.params.id},{$set: {title: req.body.title}}, 
 		{upsert: true},
